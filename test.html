@@ -1,0 +1,62 @@
+
+
+<div ng-init="pop = {''iframe':false }" class="ods-box">
+                                                                         
+                                                                        
+    <div class="ods-button" 
+            ng-click="pop.iframe = true" >
+        More Infromation
+</div> 
+
+
+<div class="ods-pop-in"
+     ng-if="pop.iframe">
+    
+    <div class="ods-pop-in__container iframe-container">
+        <iframe src="/" width="100%" height="470px">
+        <!-- Model popup page info [[ needs reorginizing ]] -->
+        <h2 class="title">{{item.fields.project_name}} {{item.fields.version}}</h2>
+        <p>Project Status: {{item.fields.project_status}}</p>
+        <p>Project Lead: {{item.fields.sme}}</p>
+        <p>Project Lead Email: {{}}</p>
+        <p>program Director: {{item.fields.program_director}}</p>
+        <p>Project Type: {{item.fields.project_type}}</p>
+        <p>Project ID: {{item.fields.model_id}}</p>
+        <p>Project Date: {{item.fields.model_date}}</p>
+        <p>Project Theme: {{}}</p>
+        <p>Data Classification used: {{item.fields.data_classification}} </p> 
+        
+        <!-- All model links -->
+        <a ng-if="!item.fields[$parent.$parent.$parent.$parent.$parent.kwebsite_url].id" href="{{ item.fields.models_on_kwebsite_url}}"
+           target="_blank"
+           class="content-card-button">
+           Model on KAPSARC Website
+        </a>
+       <a ng-if="!item.fields[$parent.$parent.$parent.$parent.$parent.kwebsite_url].id" href="{{ item.fields.model_on_github_url}}"
+           target="_blank"
+           class="content-card-button">
+           Model on GitHUb
+        </a>
+        <a ng-if="!item.fields[$parent.$parent.$parent.$parent.$parent.kwebsite_url].id" href="{{ item.fields.appvis_on_github_url}}"
+           target="_blank"
+           class="content-card-button">
+           Application on GitHUb
+        </a>
+        
+        <!-- Add here publication Links!!!! ###### -->
+        
+        
+       
+        
+        
+        
+        <button class="ods-button"
+                ng-click="pop.state = false">
+            Close
+        </button>
+    </div>
+    <div class="ods-pop-in__backdrop" ng-click="pop.state = false"></div>
+</div>
+      
+       
+</div>

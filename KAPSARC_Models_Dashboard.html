@@ -1,0 +1,1985 @@
+
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400|Roboto:300,400,500,700&display=swap" rel="stylesheet">  
+
+<div class="container-fluid1" ng-init="currencyGreen=45;currencyRed=90;">
+
+    <!--Side bar list -->
+    <div class="side-bar"  ng-init="currency=false;activity=false;quality=false;models=true">
+        <img class="project-icon" src="/assets/theme_image/kapsarc-logo-black.svg">
+        <div class="project-name-bold">Data Portal</div>
+        <div class="project-name">KPIs & Dataset Tracking</div>
+
+        <a class="bar-item" ng-class="{'active':currency}" ng-click="currency=true;activity=false;quality=false;models=false;">Currency</a>
+        <div ng-init="subselector1 = 'sub1'" ng-show="currency">
+            <a class="sub-bar-item"
+               ng-click="subselector1 = 'sub1'"
+               ng-class="{'activesub' : subselector1 == 'sub1'}">
+                General</a>
+            <a class="sub-bar-item"
+               ng-click="subselector1 = 'sub2'"
+               ng-class="{'activesub' : subselector1 == 'sub2'}">
+                Dataset Level</a>
+
+            <a class="sub-bar-item"
+               ng-click="subselector1 = 'sub3'"
+               ng-class="{'activesub' : subselector1 == 'sub3'}">
+                Time Based (soon)</a>
+
+        </div>
+
+        <!-- Models sidebar tab -->
+        <a class="bar-item" ng-class="{'active':models}" ng-click="currency=false;activity=false;quality=false;models=true;">Model Inventory</a>
+        <div ng-init="subselectorModelInv = 'sub2'" ng-show="models">
+            <a class="sub-bar-item"
+               ng-click="subselectorModelInv= 'sub1'"
+               ng-class="{'activesub' : subselectorModelInv == 'sub1'}">
+                General</a>
+            <a class="sub-bar-item"
+               ng-click="subselectorModelInv = 'sub2'"
+               ng-class="{'activesub' : subselectorModelInv == 'sub2'}">
+                Models </a>
+            
+        </div>
+        <a class="bar-item" ng-class="{'active':quality}" ng-click="currency=false;activity=false;quality=true;models=false;">Quality (soon)</a>
+        <div ng-init="subselector3 = 'sub1'" ng-show="quality">
+            <a class="sub-bar-item"
+               ng-click="subselector3= 'sub1'"
+               ng-class="{'activesub' : subselector3 == 'sub1'}">
+                General</a>
+            <a class="sub-bar-item"
+               ng-click="subselector3 = 'sub2'"
+               ng-class="{'activesub' : subselector3 == 'sub2'}">
+                Dataset Level (soon)</a>
+            <a class="sub-bar-item"
+               ng-click="subselector3 = 'sub3'"
+               ng-class="{'activesub' : subselector3 == 'sub3'}">
+                Time Based (soon)</a>
+        </div>
+        <a class="bar-item" ng-class="{'active':activity}" ng-click="currency=false;activity=true;quality=false;models=false;">Activity (soon)</a>
+        <div ng-init="subselector2 = 'sub1'" ng-show="activity">
+            <a class="sub-bar-item"
+               ng-click="subselector2 = 'sub1'"
+               ng-class="{'activesub' : subselector2 == 'sub1'}">
+                General</a>
+            <a class="sub-bar-item"
+               ng-click="subselector2 = 'sub2'"
+               ng-class="{'activesub' : subselector2 == 'sub2'}">
+                Datasets</a>
+            <a class="sub-bar-item"
+               ng-click="subselector2 = 'sub3'"
+               ng-class="{'activesub' : subselector2 == 'sub3'}">
+                Pages</a>
+        </div>
+
+
+    </div>
+
+    <div class="main-content">
+
+        <!-- currency page here -->
+        <div  ng-show="currency">
+
+            <!--General page -->
+            <div ng-if="subselector1 == 'sub1'">
+
+                <!--tob bar in general-->
+                <div class="tabs" ng-init="tabselector1 = 'tab1'">
+                    <a class="tab"
+                       ng-click="tabselector1 = 'tab1'"
+                       ng-class="{'activetab' : tabselector1 == 'tab1'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                        Overall Metrics</a>
+                    <a class="tab"
+                       ng-click="tabselector1 = 'tab2'"
+                       ng-class="{'activetab' : tabselector1 == 'tab2'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                        Public By Theme</a>
+
+                    <a class="tab"
+                       ng-click="tabselector1 = 'tab3'"
+                       ng-class="{'activetab' : tabselector1 == 'tab3'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                        Restricted By Theme</a>
+
+                </div>
+
+                <!-- Currency page here -->
+                <!-- Currency tab1 -->
+                <div class="ods-box" ng-if="tabselector1 == 'tab1'">  
+                    <ods-dataset-context
+                                         context="ctx,ctxpublished, ctxcurrency, ctxmancurrency, ctxautocurrency,ctxpublic,ctxdiscontinued,ctxcontinued,ctxresearchrelated"
+                                         ctx-dataset="datasets-metadata"
+                                         ctxpublished-dataset="datasets-metadata" ctxpublished-parameters="{'refine.published':'True'}"
+                                         ctxpublic-dataset="datasets-metadata" ctxpublic-parameters="{'refine.published':'True','refine.security':'domain'}"
+                                         ctxcontinued-dataset="datasets-metadata" ctxcontinued-parameters="{'refine.published':'True','refine.security':'domain','disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'], 'disjunctive.research_related':true,'refine.research_related':['False','NA','exception']}"
+                                         ctxdiscontinued-dataset="datasets-metadata" ctxdiscontinued-parameters="{'refine.published':'True','refine.security':'domain','refine.discontinued':'True', 'disjunctive.research_related':true,'refine.research_related':['False','NA','exception']}"
+                                         ctxresearchrelated-dataset="datasets-metadata" ctxresearchrelated-parameters="{'refine.published':'True','refine.security':'domain','disjunctive.research_related':true,'refine.research_related':'True'}"
+                                         ctxcurrency-dataset="datasets-metadata" ctxcurrency-parameters="{'refine.published':'True','refine.security':'domain',
+                                                                                                         'disjunctive.research_related':true,'refine.research_related':['False','NA','exception'],
+                                                                                                         'disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception']}"
+                                         ctxmancurrency-dataset="datasets-metadata" ctxmancurrency-parameters="{'refine.published':'True','refine.security':'domain','disjunctive.research_related':true,
+                                                                                                               'refine.research_related':['False','NA','exception'],'disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],'refine.is_automated':'False'}"
+                                         ctxautocurrency-dataset="datasets-metadata" ctxautocurrency-parameters="{'refine.published':'True','refine.security':'domain','disjunctive.research_related':true,
+                                                                                                                 'refine.research_related':['False','NA','exception'],'disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],'refine.is_automated':'True'}">
+                        <h1>KPI Measures</h1>
+                        <div class=row>
+                            <span class="meta-label">Source: </span>
+                            <span class="dataset-meta">
+                                <a href="/explore/dataset/datasets-metadata/" target="_blank">Datasets Metadata</a>
+                            </span>
+                            <span class="meta-label">Last Update:</span>
+                            <span class="dataset-meta">{{ctx.dataset.metas["modified"] | date:'MMMM d y' }}</span>
+                            <span class="meta-label">Currency: </span>
+                            <span class="dataset-meta">
+                                (<i class="fa fa-circle circle good"></i> days&lt;={{currencyGreen}}, &nbsp; &nbsp;
+                                <i class="fa fa-circle circle medium"></i> {{currencyGreen}}&lt;days&lt;{{currencyRed}},  &nbsp; &nbsp;
+                                <i class="fa fa-circle circle bad"></i> days&gt;={{currencyRed}})
+                            </span>
+                        </div>
+                        <br/>
+                        <div ods-aggregation="currency"
+                             ods-aggregation-context="ctxcurrency"
+                             ods-aggregation-function="AVG"
+                             ods-aggregation-expression="currency">
+                            <div ods-aggregation="countcurrency"
+                                 ods-aggregation-context="ctxcurrency"
+                                 ods-aggregation-function="COUNT"
+                                 ods-aggregation-expression="currency">
+                                <div ods-aggregation="mancurrency"
+                                     ods-aggregation-context="ctxmancurrency"
+                                     ods-aggregation-function="AVG"
+                                     ods-aggregation-expression="currency">
+                                    <div ods-aggregation="mancount"
+                                         ods-aggregation-context="ctxmancurrency"
+                                         ods-aggregation-function="COUNT"
+                                         ods-aggregation-expression="currency">
+                                        <div ods-aggregation="autocurrency"
+                                             ods-aggregation-context="ctxautocurrency"
+                                             ods-aggregation-function="AVG"
+                                             ods-aggregation-expression="currency">
+                                            <div ods-aggregation="autocount"
+                                                 ods-aggregation-context="ctxautocurrency"
+                                                 ods-aggregation-function="COUNT"
+                                                 ods-aggregation-expression="currency">
+
+                                                <div ods-aggregation="total"
+                                                     ods-aggregation-context="ctx"
+                                                     ods-aggregation-function="COUNT"
+                                                     ods-aggregation-expression="dataset_uid">
+                                                    <div ods-aggregation="published"
+                                                         ods-aggregation-context="ctxpublished"
+                                                         ods-aggregation-function="COUNT"
+                                                         ods-aggregation-expression="published">
+                                                        <div ods-aggregation="public"
+                                                             ods-aggregation-context="ctxpublic"
+                                                             ods-aggregation-function="COUNT"
+                                                             ods-aggregation-expression="dataset_uid">
+                                                            <div ods-aggregation="discontinued"
+                                                                 ods-aggregation-context="ctxdiscontinued"
+                                                                 ods-aggregation-function="COUNT"
+                                                                 ods-aggregation-expression="dataset_uid">
+                                                                <div ods-aggregation="continued"
+                                                                     ods-aggregation-context="ctxcontinued"
+                                                                     ods-aggregation-function="COUNT"
+                                                                     ods-aggregation-expression="dataset_uid">
+
+                                                                    <div ods-aggregation="researchrelated"
+                                                                         ods-aggregation-context="ctxresearchrelated"
+                                                                         ods-aggregation-function="COUNT"
+                                                                         ods-aggregation-expression="dataset_uid">
+
+
+
+                                                                        <div class="row">
+                                                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                                                <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/" target="_blank">
+                                                                                    <div class="kpi" >
+                                                                                        <div class="kpi-title">
+                                                                                            No. of Items
+                                                                                        </div>
+                                                                                        <div class="kpi-value">
+                                                                                            {{ total | number }} 
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                                                <div class="kpi">
+                                                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True" target="_blank">
+
+                                                                                        <div class="kpi-title">
+                                                                                            Published
+                                                                                        </div>
+                                                                                        <div class="kpi-value">
+                                                                                            {{ published | number }}
+                                                                                        </div>
+                                                                                    </a>
+                                                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=False" target="_blank">
+
+                                                                                        <div class="kpi-value-reference">
+                                                                                            Unpublished: <span class="bold">{{ total-published | number }}</span>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                                                <div class="kpi">
+                                                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain" target="_blank">
+
+                                                                                        <div class="kpi-title">
+                                                                                            Public
+                                                                                        </div>
+                                                                                        <div class="kpi-value">
+                                                                                            {{ public | number }}
+                                                                                        </div>
+                                                                                    </a>
+                                                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=restricted" target="_blank">
+
+                                                                                        <div class="kpi-value-reference">
+                                                                                            Restricted: <span class="bold">{{ published - public | number }}</span>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                                                <div class="kpi">
+                                                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain&refine.research_related=False" target="_blank">
+                                                                                        <div class="kpi-title">
+                                                                                            <!--Non Research Related-->
+                                                                                            Data
+                                                                                        </div>
+                                                                                        <div class="kpi-value">
+                                                                                            {{ public- researchrelated | number:0 }}
+                                                                                        </div>
+                                                                                    </a>
+                                                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain&refine.research_related=True" target="_blank">
+
+                                                                                        <div class="kpi-value-reference">
+                                                                                            <!--Research Related: <span class="bold">{{ researchrelated}}</span>-->
+                                                                                            Publications: <span class="bold">{{ researchrelated | number:0 }}</span>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <br /><br /><br /><br />
+                                                                        <div class="row">
+                                                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                                            </div>
+                                                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                                                <div class="kpi">
+                                                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain&refine.research_related=False&refine.discontinued=False" target="_blank">
+                                                                                        <div class="kpi-title">
+                                                                                            Dataset
+                                                                                        </div>
+                                                                                        <div class="kpi-value">
+                                                                                            {{ continued | number:0 }}
+                                                                                        </div>
+                                                                                    </a>
+                                                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain&refine.research_related=False&refine.discontinued=True" target="_blank">
+                                                                                        <div class="kpi-value-reference">
+                                                                                            Discontinued: <span class="bold">{{ discontinued | number }}</span>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                                                <div class="kpi" ng-class="{'good' : currency<=currencyGreen,'medium':currency > currencyGreen && currency < currencyRed,'bad' : currency >= currencyRed}">
+                                                                                    <div class="kpi-title">
+                                                                                        Currency
+                                                                                    </div>
+                                                                                    <div class="kpi-value">
+                                                                                        {{ currency | number:0 }}
+                                                                                    </div>
+                                                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain&refine.research_related=False&refine.discontinued=False" target="_blank">
+                                                                                        <div class="kpi-value-reference">
+                                                                                            <span class="bold">{{ countcurrency | number }} </span> datasets
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <br /><br /><br /><br />
+                                                                        <div class="row">
+                                                                            <div class="col-md-3 col-sm-3 col-xs-4">
+
+                                                                            </div>
+                                                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                                                <div class="kpi" ng-class="{'good' : mancurrency<=currencyGreen,'medium':mancurrency > currencyGreen && mancurrency < currencyRed,'bad' : mancurrency >= currencyRed}">
+                                                                                    <div class="kpi-title">
+                                                                                        Man.Currency
+                                                                                    </div>
+                                                                                    <div class="kpi-value">
+                                                                                        {{ mancurrency | number:0 }}
+                                                                                    </div>
+                                                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain&refine.research_related=False&refine.discontinued=False&refine.is_automated=False" target="_blank">
+                                                                                        <div class="kpi-value-reference">
+                                                                                            <span class="bold">{{mancount}} </span> Man.datasets ({{mancount/countcurrency*100 | number:0 }}%)
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                                                <div class="kpi" ng-class="{'good' : autocurrency<=currencyGreen,'medium':autocurrency > currencyGreen && autocurrency < currencyRed,'bad' : autocurrency > currencyRed}">
+                                                                                    <div class="kpi-title">
+                                                                                        Auto.Currency
+                                                                                    </div>
+                                                                                    <div class="kpi-value">
+                                                                                        {{ autocurrency | number : 0 }}
+                                                                                    </div>
+                                                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain&refine.research_related=False&refine.discontinued=False&refine.is_automated=True" target="_blank">
+
+                                                                                        <div class="kpi-value-reference">
+                                                                                            <span class="bold">{{ autocount | number : 0 }}</span> Auto.datasets  ({{autocount/countcurrency*100 | number:0 }}%)
+                                                                                        </div>
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                </div>
+
+
+
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>     
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </ods-dataset-context>
+
+                    <br />
+                </div>
+
+                <!-- Currency tab2-->
+                <div class="ods-box" ng-if="tabselector1 == 'tab2'"> 
+
+
+                    <ods-dataset-context context="ctx"  ctx-dataset="datasets-metadata">
+
+
+                        <h1>Public Datasets Currency by Theme</h1>
+                        <div class=row>
+                            <span class="meta-label">Source: </span>
+                            <span class="dataset-meta">
+                                <a href="/explore/dataset/datasets-metadata/" target="_blank">Datasets Metadata</a>
+                            </span>
+                            <span class="meta-label">Last Update:</span>
+                            <span class="dataset-meta">{{ctx.dataset.metas["modified"] | date:'MMMM d y' }}</span>
+                            <span class="meta-label">Currency:</span>
+                            <span class="dataset-meta">
+                                (<i class="fa fa-circle circle good"></i> days&lt;={{currencyGreen}}, &nbsp; &nbsp;
+                                <i class="fa fa-circle circle medium"></i> {{currencyGreen}}&lt;days&lt;{{currencyRed}},  &nbsp; &nbsp;
+                                <i class="fa fa-circle circle bad"></i> days&gt;={{currencyRed}})
+                            </span>
+                        </div>
+                        <br/>
+
+                        <div ng-init="themelead = ['Abeer', 'Sadeem','Alaa']" ng-repeat="item in ['Energy', 'Economy','Environment']">
+
+                            <ods-dataset-context
+                                                 context="ctxcontinued, ctxdiscontinued,
+                                                          ctxcurrency,ctxmancurrency, ctxautocurrency"
+
+                                                 ctxcontinued-dataset="datasets-metadata" ctxcontinued-parameters="{'refine.published':'True','refine.security':'domain','disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],
+                                                                                                                   'disjunctive.research_related':true,'refine.research_related':['False','NA','exception'],'refine.theme_owner':''}"
+                                                 ctxdiscontinued-dataset="datasets-metadata" ctxdiscontinued-parameters="{'refine.published':'True','refine.security':'domain','refine.discontinued':'True', 'disjunctive.research_related':true,
+                                                                                                                         'refine.research_related':['False','NA','exception'],'refine.theme_owner':''}"
+
+
+
+                                                 ctxcurrency-dataset="datasets-metadata" ctxcurrency-parameters="{'refine.published':'True','refine.security':'domain','disjunctive.research_related':true,'refine.research_related':['False','NA','exception'],
+                                                                                                                 'disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],'refine.theme_owner':''}"
+
+                                                 ctxmancurrency-dataset="datasets-metadata" ctxmancurrency-parameters="{'refine.published':'True','refine.security':'domain','disjunctive.research_related':true,
+                                                                                                                       'refine.research_related':['False','NA','exception'],'disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],
+                                                                                                                       'refine.is_automated':'False','refine.theme_owner':''}"
+
+                                                 ctxautocurrency-dataset="datasets-metadata" ctxautocurrency-parameters="{'refine.published':'True','refine.security':'domain','disjunctive.research_related':true,
+                                                                                                                         'refine.research_related':['False','NA','exception'],'disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],
+                                                                                                                         'refine.is_automated':'True','refine.theme_owner':''}">
+                                {{
+                                ctxcontinued.parameters['refine.theme_owner']=themelead[$index];
+                                ctxdiscontinued.parameters['refine.theme_owner']=themelead[$index];
+
+                                ctxcurrency.parameters['refine.theme_owner']=themelead[$index];
+                                ctxmancurrency.parameters['refine.theme_owner']=themelead[$index];
+                                ctxautocurrency.parameters['refine.theme_owner']=themelead[$index];
+
+                                ""}}
+
+                                <b>{{item}}</b> - {{themelead[$index]}} 
+                                <br />
+
+                                <div ods-aggregation="currency"
+                                     ods-aggregation-context="ctxcurrency"
+                                     ods-aggregation-function="AVG"
+                                     ods-aggregation-expression="currency">
+                                    <div ods-aggregation="countcurrency"
+                                         ods-aggregation-context="ctxcurrency"
+                                         ods-aggregation-function="COUNT"
+                                         ods-aggregation-expression="currency">
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                <div ods-aggregation="continued"
+                                                     ods-aggregation-context="ctxcontinued"
+                                                     ods-aggregation-function="COUNT"
+                                                     ods-aggregation-expression="dataset_uid">
+                                                    <div ods-aggregation="discontinued"
+                                                         ods-aggregation-context="ctxdiscontinued"
+                                                         ods-aggregation-function="COUNT"
+                                                         ods-aggregation-expression="dataset_uid">
+                                                        <div class="kpi">
+                                                            <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain&refine.research_related=False&refine.discontinued=False&refine.theme_owner={{themelead[$index]}}" target="_blank">
+                                                                <div class="kpi-title">
+                                                                    Dataset
+                                                                </div>
+                                                                <div class="kpi-value">
+                                                                    {{ continued | number}}
+                                                                </div>
+                                                            </a>
+                                                            <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain&refine.research_related=False&refine.discontinued=True&refine.theme_owner={{themelead[$index]}}" target="_blank">
+                                                                <div class="kpi-value-reference">
+                                                                    Discontinued: <b>{{ discontinued | number }}</b>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-4">
+
+                                                <div class="kpi" ng-class="{'good' : currency<=currencyGreen,'medium':currency > currencyGreen && currency < currencyRed,'bad' : currency >= currencyRed}">
+
+                                                    <div class="kpi-title">
+                                                        Currency
+                                                    </div>
+                                                    <div class="kpi-value">
+                                                        {{ currency | number:0 }}
+                                                    </div>
+                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain&refine.research_related=False&refine.discontinued=False&refine.theme_owner={{themelead[$index]}}" target="_blank">
+                                                        <div class="kpi-value-reference">
+                                                            <b>{{ countcurrency | number }} </b> datasets
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-4">
+
+                                                <div ods-aggregation="mancurrency"
+                                                     ods-aggregation-context="ctxmancurrency"
+                                                     ods-aggregation-function="AVG"
+                                                     ods-aggregation-expression="currency">
+                                                    <div ods-aggregation="mancount"
+                                                         ods-aggregation-context="ctxmancurrency"
+                                                         ods-aggregation-function="COUNT"
+                                                         ods-aggregation-expression="currency">
+                                                        <div class="kpi" ng-class="{'good' : mancurrency<currencyGreen,'medium':mancurrency > currencyGreen && mancurrency < currencyRed,'bad' : mancurrency >= currencyRed}">
+                                                            <div class="kpi-title">
+                                                                Man.Currency
+                                                            </div>
+                                                            <div class="kpi-value">
+                                                                {{ mancurrency | number:0 }}
+                                                            </div>
+                                                            <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain&refine.research_related=False&refine.discontinued=False&refine.theme_owner={{themelead[$index]}}&refine.is_automated=False" target="_blank">
+
+                                                                <div class="kpi-value-reference">
+                                                                    <b>{{mancount}} </b> Man.datasets ({{mancount/countcurrency*100 | number:0 }}%)
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                <div ods-aggregation="autocurrency"
+                                                     ods-aggregation-context="ctxautocurrency"
+                                                     ods-aggregation-function="AVG"
+                                                     ods-aggregation-expression="currency">
+                                                    <div ods-aggregation="autocount"
+                                                         ods-aggregation-context="ctxautocurrency"
+                                                         ods-aggregation-function="COUNT"
+                                                         ods-aggregation-expression="currency">
+
+                                                        <div class="kpi" ng-class="{'good' : autocurrency<currencyGreen,'medium':autocurrency > currencyGreen && autocurrency < currencyRed,'bad' : autocurrency >= currencyRed}">
+                                                            <div class="kpi-title">
+                                                                Auto.Currency
+
+                                                            </div>
+                                                            <div class="kpi-value">
+                                                                {{ autocurrency | number : 0 }}
+                                                            </div>
+                                                            <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=domain&refine.research_related=False&refine.discontinued=False&refine.theme_owner={{themelead[$index]}}&refine.is_automated=True" target="_blank">  
+                                                                <div class="kpi-value-reference">
+                                                                    <b>{{ autocount | number : 0 }}</b> Auto.datasets  ({{autocount/countcurrency*100 | number:0 }}%)
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <br /><br /><br />
+
+                                    </div>
+                                </div>
+                            </ods-dataset-context>
+                        </div>
+
+
+
+                    </ods-dataset-context>
+
+                    <br />
+
+                </div>
+
+                <!-- Currency tab3-->
+                <div class="ods-box" ng-if="tabselector1 == 'tab3'"> 
+
+
+                    <ods-dataset-context context="ctx"  ctx-dataset="datasets-metadata">
+
+
+                        <h1>Restricted Datasets Currency by Theme</h1>
+                        <div class=row>
+                            <span class="meta-label">Source: </span>
+                            <span class="dataset-meta">
+                                <a href="/explore/dataset/datasets-metadata/" target="_blank">Datasets Metadata</a>
+                            </span>
+                            <span class="meta-label">Last Update:</span>
+                            <span class="dataset-meta">{{ctx.dataset.metas["modified"] | date:'MMMM d y' }}</span>
+                            <span class="meta-label">Currency:</span>
+                            <span class="dataset-meta">
+                                (<i class="fa fa-circle circle good"></i> days&lt;={{currencyGreen}}, &nbsp; &nbsp;
+                                <i class="fa fa-circle circle medium"></i> {{currencyGreen}}&lt;days&lt;{{currencyRed}},  &nbsp; &nbsp;
+                                <i class="fa fa-circle circle bad"></i> days&gt;={{currencyRed}})
+                            </span>
+                        </div>
+                        <br/>
+
+                        <div ng-init="themelead = ['Abeer', 'Sadeem','Alaa']" ng-repeat="item in ['Energy', 'Economy','Environment']">
+
+                            <ods-dataset-context
+                                                 context="ctxcontinued, ctxdiscontinued,
+                                                          ctxcurrency,ctxmancurrency, ctxautocurrency"
+
+                                                 ctxcontinued-dataset="datasets-metadata" ctxcontinued-parameters="{'refine.published':'True','refine.security':'restricted','disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],
+                                                                                                                   'disjunctive.research_related':true,'refine.research_related':['False','NA','exception'],'refine.theme_owner':''}"
+                                                 ctxdiscontinued-dataset="datasets-metadata" ctxdiscontinued-parameters="{'refine.published':'True','refine.security':'restricted','disjunctive.discontinued':true,'refine.discontinued':'True',
+                                                                                                                         'disjunctive.research_related':true,'refine.research_related':['False','NA','exception'],'refine.theme_owner':''}"
+
+
+
+                                                 ctxcurrency-dataset="datasets-metadata" ctxcurrency-parameters="{'refine.published':'True','refine.security':'restricted','disjunctive.research_related':true,'refine.research_related':['False','NA','exception'],
+                                                                                                                 'disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],'refine.theme_owner':''}"
+
+                                                 ctxmancurrency-dataset="datasets-metadata" ctxmancurrency-parameters="{'refine.published':'True','refine.security':'restricted','disjunctive.research_related':true,
+                                                                                                                       'refine.research_related':['False','NA','exception'],'disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],
+                                                                                                                       'refine.is_automated':'False','refine.theme_owner':''}"
+                                                 ctxautocurrency-dataset="datasets-metadata" ctxautocurrency-parameters="{'refine.published':'True','refine.security':'restricted','disjunctive.research_related':true,
+                                                                                                                         'refine.research_related':['False','NA','exception'],'disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],
+                                                                                                                         'refine.is_automated':'True','refine.theme_owner':''}">
+                                {{
+                                ctxcontinued.parameters['refine.theme_owner']=themelead[$index];
+                                ctxdiscontinued.parameters['refine.theme_owner']=themelead[$index];
+
+                                ctxcurrency.parameters['refine.theme_owner']=themelead[$index];
+                                ctxmancurrency.parameters['refine.theme_owner']=themelead[$index];
+                                ctxautocurrency.parameters['refine.theme_owner']=themelead[$index];
+
+                                ""}}
+
+                                <b>{{item}}</b> - {{themelead[$index]}} 
+                                <br />
+
+                                <div ods-aggregation="currency"
+                                     ods-aggregation-context="ctxcurrency"
+                                     ods-aggregation-function="AVG"
+                                     ods-aggregation-expression="currency">
+                                    <div ods-aggregation="countcurrency"
+                                         ods-aggregation-context="ctxcurrency"
+                                         ods-aggregation-function="COUNT"
+                                         ods-aggregation-expression="currency">
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                <div ods-aggregation="continued"
+                                                     ods-aggregation-context="ctxcontinued"
+                                                     ods-aggregation-function="COUNT"
+                                                     ods-aggregation-expression="dataset_uid">
+                                                    <div ods-aggregation="discontinued"
+                                                         ods-aggregation-context="ctxdiscontinued"
+                                                         ods-aggregation-function="COUNT"
+                                                         ods-aggregation-expression="dataset_uid">
+                                                        <div class="kpi">
+                                                            <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=restricted&refine.research_related=False&refine.discontinued=False&refine.theme_owner={{themelead[$index]}}" target="_blank">
+
+                                                                <div class="kpi-title">
+                                                                    Datasets
+                                                                </div>
+                                                                <div class="kpi-value">
+                                                                    {{ continued | number}}
+                                                                </div>
+                                                            </a>
+                                                            <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=restricted&refine.research_related=False&refine.discontinued=True&refine.theme_owner={{themelead[$index]}}" target="_blank">
+
+                                                                <div class="kpi-value-reference">
+                                                                    Discontinued: <b>{{ discontinued | number }}</b>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-4">
+
+                                                <div class="kpi" ng-class="{'good' : currency<=currencyGreen,'medium':currency > currencyGreen && currency < currencyRed,'bad' : currency >= currencyRed}">
+
+                                                    <div class="kpi-title">
+                                                        Currency
+                                                    </div>
+                                                    <div class="kpi-value">
+                                                        {{ currency | number:0 }}
+                                                    </div>
+                                                    <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=restricted&refine.research_related=False&refine.discontinued=False&refine.theme_owner={{themelead[$index]}}" target="_blank">
+                                                        <div class="kpi-value-reference">
+                                                            <b>{{ countcurrency | number }} </b> datasets
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-4">
+
+                                                <div ods-aggregation="mancurrency"
+                                                     ods-aggregation-context="ctxmancurrency"
+                                                     ods-aggregation-function="AVG"
+                                                     ods-aggregation-expression="currency">
+                                                    <div ods-aggregation="mancount"
+                                                         ods-aggregation-context="ctxmancurrency"
+                                                         ods-aggregation-function="COUNT"
+                                                         ods-aggregation-expression="currency">
+                                                        <div class="kpi" ng-class="{'good' : mancurrency<=currencyGreen,'medium':mancurrency > currencyGreen && mancurrency < currencyRed,'bad' : mancurrency >= currencyRed}">
+                                                            <div class="kpi-title">
+                                                                Man.Currency
+                                                            </div>
+                                                            <div class="kpi-value">
+                                                                {{ mancurrency | number:0 }}
+                                                            </div>
+                                                            <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=restricted&refine.research_related=False&refine.discontinued=False&refine.theme_owner={{themelead[$index]}}&refine.is_automated=False" target="_blank">
+
+                                                                <div class="kpi-value-reference">
+                                                                    <b>{{mancount}} </b> Man.datasets ({{mancount/countcurrency*100 | number:0 }}%)
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                                <div ods-aggregation="autocurrency"
+                                                     ods-aggregation-context="ctxautocurrency"
+                                                     ods-aggregation-function="AVG"
+                                                     ods-aggregation-expression="currency">
+                                                    <div ods-aggregation="autocount"
+                                                         ods-aggregation-context="ctxautocurrency"
+                                                         ods-aggregation-function="COUNT"
+                                                         ods-aggregation-expression="currency">
+
+                                                        <div class="kpi" ng-class="{'good' : autocurrency<=currencyGreen,'medium':autocurrency > currencyGreen && autocurrency < currencyRed,'bad' : autocurrency >= currencyRed}">
+                                                            <div class="kpi-title">
+                                                                Auto.Currency
+
+                                                            </div>
+                                                            <div class="kpi-value">
+                                                                {{ autocurrency | number : 0 }}
+                                                            </div>
+                                                            <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.security=restricted&refine.research_related=False&refine.discontinued=False&refine.theme_owner={{themelead[$index]}}&refine.is_automated=True" target="_blank">
+                                                                <div class="kpi-value-reference">
+                                                                    <b>{{ autocount | number : 0 }}</b> Auto.datasets  ({{autocount/countcurrency*100 | number:0 }}%)
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <br /><br /><br />
+
+                                    </div>
+                                </div>
+                            </ods-dataset-context>
+                        </div>
+
+
+
+                    </ods-dataset-context>
+
+                    <br />
+
+                </div>
+            </div>
+
+
+            <!-- dataset level page-->
+            <div ng-if="subselector1 == 'sub2'">
+                <div class="tabs" ng-init="selectedThemelead=['Abeer']">
+                    <a class="tab"
+                       ng-click="selectedThemelead=['Abeer']"
+                       ng-class="{'activetab' : selectedThemelead[0] == 'Abeer'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                        <b>Energy</b> - Abeer</a>
+                    <a class="tab"
+                       ng-click="selectedThemelead=['Sadeem']"
+                       ng-class="{'activetab' : selectedThemelead[0] == 'Sadeem'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                        <b>Economy</b> - Sadeem</a>
+
+                    <a class="tab"
+                       ng-click="selectedThemelead=['Alaa']"
+                       ng-class="{'activetab' : selectedThemelead[0] == 'Alaa'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                        <b>Environment</b> - Alaa</a>
+
+                </div>
+
+                <ods-dataset-context context="ctx"  ctx-dataset="datasets-metadata">
+                    <ods-dataset-context
+                                         context="ctxcontinued, ctxdiscontinued,
+                                                  ctxdomaincurrency, ctxrestrictedcurrency,ctxmancurrency"
+
+                                         ctxcontinued-dataset="datasets-metadata" ctxcontinued-parameters="{'refine.published':'True','disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],
+                                                                                                           'disjunctive.research_related':true,'refine.research_related':['False','NA','exception'],'refine.is_automated':'False','refine.theme_owner':''}"
+
+                                         ctxdiscontinued-dataset="datasets-metadata" ctxdiscontinued-parameters="{'refine.published':'True','refine.discontinued':'True', 'disjunctive.research_related':true,
+                                                                                                                 'refine.research_related':['False','NA','exception'],'refine.is_automated':'False','refine.theme_owner':''}"
+
+
+
+                                         ctxdomaincurrency-dataset="datasets-metadata" ctxdomaincurrency-parameters="{'refine.published':'True','disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],
+                                                                                                                     'disjunctive.research_related':true,'refine.research_related':['False','NA','exception'],'refine.is_automated':'False', 'refine.security':'domain','refine.theme_owner':''}"
+
+                                         ctxrestrictedcurrency-dataset="datasets-metadata" ctxrestrictedcurrency-parameters="{'refine.published':'True','disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],
+                                                                                                                             'disjunctive.research_related':true,'refine.research_related':['False','NA','exception'],'refine.is_automated':'False', 'refine.security':'restricted','refine.theme_owner':''}"
+
+
+                                         ctxmancurrency-dataset="datasets-metadata" ctxmancurrency-parameters="{'refine.published':'True','disjunctive.discontinued':true,'refine.discontinued':['NA','False','exception'],
+                                                                                                               'disjunctive.research_related':true,'refine.research_related':['False','NA','exception'],'refine.is_automated':'False','refine.theme_owner':'', 'refine.security':'',sort:''}">
+
+                        {{
+
+                        ctxcontinued.parameters['refine.theme_owner']=selectedThemelead;
+                        ctxdiscontinued.parameters['refine.theme_owner']=selectedThemelead;
+
+                        ctxdomaincurrency.parameters['refine.theme_owner']=selectedThemelead;
+                        ctxrestrictedcurrency.parameters['refine.theme_owner']=selectedThemelead;
+
+                        ctxmancurrency.parameters['refine.theme_owner']=selectedThemelead;
+
+
+                        ""}}
+
+                        <!-- white box 1-->
+                        <div class="ods-box">  
+
+                            <h1>Man.Datasets Currency</h1>
+                            <div class="row">
+                                <span class="meta-label">Source: </span>
+                                <span class="dataset-meta">
+                                    <a href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.research_related=False&refine.is_automated=False&disjunctive.theme_owner&disjunctive.research_related&disjunctive.discontinued&disjunctive.data_classification&disjunctive.security&disjunctive.updatetype&disjunctive.currency&disjunctive.status&disjunctive.publisher&disjunctive.predecessor&disjunctive.main_theme&disjunctive.dataset_country&disjunctive.metadata_score&refine.theme_owner={{selectedThemelead[0]}}" target="_blank">Datasets Metadata</a>
+                                </span>
+                                <span class="meta-label">Last Update:</span>
+                                <span class="dataset-meta">{{ctx.dataset.metas["modified"] | date:'MMMM d y' }}</span>
+                                <span class="meta-label">Currency:</span>
+                                <span class="dataset-meta">
+                                    (<i class="fa fa-circle circle good"></i> days&lt;={{currencyGreen}}, &nbsp; &nbsp;
+                                    <i class="fa fa-circle circle medium"></i> {{currencyGreen}}&lt;days&lt;{{currencyRed}},  &nbsp; &nbsp;
+                                    <i class="fa fa-circle circle bad"></i> days&gt;={{currencyRed}})
+                                </span>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                    <div ods-aggregation="continued"
+                                         ods-aggregation-context="ctxcontinued"
+                                         ods-aggregation-function="COUNT"
+                                         ods-aggregation-expression="dataset_uid">
+                                        <div ods-aggregation="discontinued"
+                                             ods-aggregation-context="ctxdiscontinued"
+                                             ods-aggregation-function="COUNT"
+                                             ods-aggregation-expression="dataset_uid">
+                                            <div class="kpi">
+                                                <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.research_related=False&refine.is_automated=False&disjunctive.theme_owner&disjunctive.research_related&disjunctive.discontinued&disjunctive.data_classification&disjunctive.security&disjunctive.updatetype&disjunctive.currency&disjunctive.status&disjunctive.publisher&disjunctive.predecessor&disjunctive.main_theme&disjunctive.dataset_country&disjunctive.metadata_score&refine.theme_owner={{selectedThemelead[0]}}&refine.discontinued=False" target="_blank">
+
+                                                    <div class="kpi-title">
+                                                        Total Dataset
+                                                    </div>
+                                                    <div class="kpi-value">
+                                                        {{ continued | number}}
+                                                    </div>
+                                                </a>
+                                                <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.research_related=False&refine.is_automated=False&disjunctive.theme_owner&disjunctive.research_related&disjunctive.discontinued&disjunctive.data_classification&disjunctive.security&disjunctive.updatetype&disjunctive.currency&disjunctive.status&disjunctive.publisher&disjunctive.predecessor&disjunctive.main_theme&disjunctive.dataset_country&disjunctive.metadata_score&refine.theme_owner={{selectedThemelead[0]}}&refine.discontinued=True" target="_blank">
+
+                                                    <div class="kpi-value-reference">
+                                                        Discontinued: <b>{{ discontinued | number }}</b>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4">
+                                    <div ods-aggregation="domaincurrency"
+                                         ods-aggregation-context="ctxdomaincurrency"
+                                         ods-aggregation-function="AVG"
+                                         ods-aggregation-expression="currency">
+                                        <div ods-aggregation="domaincount"
+                                             ods-aggregation-context="ctxdomaincurrency"
+                                             ods-aggregation-function="COUNT"
+                                             ods-aggregation-expression="dataset_uid">
+                                            <div class="kpi" ng-class="{'good' : domaincurrency<=currencyGreen,'medium':domaincurrency > currencyGreen && domaincurrency < currencyRed,'bad' : domaincurrency >= currencyRed}">
+
+                                                <div class="kpi-title">
+                                                    Public Currency
+                                                </div>
+                                                <div class="kpi-value">
+                                                    {{ domaincurrency  | number:0 }}
+                                                </div>
+                                                <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.research_related=False&refine.is_automated=False&disjunctive.theme_owner&disjunctive.research_related&disjunctive.discontinued&disjunctive.data_classification&disjunctive.security&disjunctive.updatetype&disjunctive.currency&disjunctive.status&disjunctive.publisher&disjunctive.predecessor&disjunctive.main_theme&disjunctive.dataset_country&disjunctive.metadata_score&refine.theme_owner={{selectedThemelead[0]}}&refine.discontinued=False&refine.security=domain" target="_blank">
+
+                                                    <div class="kpi-value-reference">
+                                                        <b>{{ domaincount | number }}</b> public datasets
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4">
+
+                                    <div ods-aggregation="rescurrency"
+                                         ods-aggregation-context="ctxrestrictedcurrency"
+                                         ods-aggregation-function="AVG"
+                                         ods-aggregation-expression="currency">
+                                        <div ods-aggregation="rescount"
+                                             ods-aggregation-context="ctxrestrictedcurrency"
+                                             ods-aggregation-function="COUNT"
+                                             ods-aggregation-expression="currency">
+                                            <div class="kpi" ng-class="{'good' : rescurrency<=currencyGreen,'medium':rescurrency > currencyGreen && rescurrency < currencyRed,'bad' : rescurrency >= currencyRed}">
+                                                <div class="kpi-title">
+                                                    Restricted Currency
+                                                </div>
+                                                <div class="kpi-value">
+                                                    {{ rescurrency | number:0 }}
+                                                </div>
+                                                <a class="kpi-link" href="/explore/dataset/datasets-metadata/table/?sort=currency&refine.published=True&refine.research_related=False&refine.is_automated=False&disjunctive.theme_owner&disjunctive.research_related&disjunctive.discontinued&disjunctive.data_classification&disjunctive.security&disjunctive.updatetype&disjunctive.currency&disjunctive.status&disjunctive.publisher&disjunctive.predecessor&disjunctive.main_theme&disjunctive.dataset_country&disjunctive.metadata_score&refine.theme_owner={{selectedThemelead[0]}}&refine.discontinued=False&refine.security=restricted" target="_blank">
+
+
+                                                    <div class="kpi-value-reference">
+                                                        <b>{{rescount}} </b> restricted datasets
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <!--white box 2-->
+                        <div ods-results="mancurrencyitems" ods-results-context="ctxmancurrency" ods-results-max="{{ ctxmancurrency.nhits }}" >
+                            <div ods-results="discontinueditems" ods-results-context="ctxdiscontinued" ods-results-max="{{ ctxdiscontinued.nhits }}" class="row align-items-start">
+
+
+
+
+                                <!--white box 3 -->
+                                <div class="ods-box" style="margin: 10px;">  
+
+                                    <div class="row">
+                                        <span class="meta-label"></span>
+                                        <span>
+                                            <b>{{ ctxmancurrency.nhits }}</b> continued datasets 
+                                        </span>
+                                        <span class="meta-label">Sort By:</span>
+                                        <span class="dataset-meta">
+                                            <select  ng-init="selectedSorting='currency'" ng-model="selectedSorting">
+                                                <option value="currency" selected>currency</option>
+                                                <option value="-expected_next_release">expected_next_release</option>
+                                                <option value="publisher">publisher</option>
+                                            </select>
+                                        </span>
+                                        <span class="meta-label">Security:</span>
+                                        <span class="dataset-meta">
+                                            <select  ng-init="selectedSecurity='domain'" ng-model="selectedSecurity">
+                                                <!-- <option value="" selected>all</option> -->
+                                                <option value="domain" selected>public</option>
+                                                <option value="restricted">restricted</option>
+                                            </select>
+                                        </span>
+                                        <span class="meta-label"></span>
+                                        <span>
+                                            <input type="checkbox" ng-init="hideZero=true" ng-model="hideZero" ng-checked="hideZero"> Hide <b>[0 days]</b> currency
+                                        </span>
+                                        <span class="meta-label"></span>
+                                        <span>
+                                            <input type="checkbox" ng-init="hideDiscontinued=true" ng-model="hideDiscontinued" ng-checked="hideDiscontinued"> Hide Discontinued
+                                        </span>
+
+                                    </div>
+                                    {{
+                                    ctxmancurrency.parameters['sort']=selectedSorting;
+                                    ctxmancurrency.parameters['refine.security']=selectedSecurity;
+
+                                    discontinueditems.parameters['sort']=selectedSorting;
+                                    discontinueditems.parameters['refine.security']=selectedSecurity;
+                                    ""}}
+                                    <hr />
+                                    <br />
+
+                                    <div>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" style="width: 45%">Title</th>
+                                                    <th scope="col">Currency</th>
+                                                    <th scope="col">Expected Next Release</th>
+                                                    <th scope="col" style="width: 25%">Publisher</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr style="border-bottom: 1px solid #fff;" ng-repeat="item in mancurrencyitems"  ng-if="!(item.fields.currency==0 && hideZero)" ng-class="{'good' : item.fields.currency<=currencyGreen,'medium':item.fields.currency > currencyGreen && item.fields.currency < currencyRed,'bad': item.fields.currency >= currencyRed}">
+
+                                                    <td>
+                                                        <span style="font-size: 20px;">{{item.fields.dataset_title}}</span>
+
+                                                        <a   href="/explore/dataset/{{item.fields.dataset_id}}/table" target="_blank">
+                                                            [open]
+                                                        </a>
+
+                                                    </td>
+                                                    <td><span class="bold">{{item.fields.currency}}</span> days</td>
+                                                    <td>{{item.fields.expected_next_release}} </td>
+                                                    <td>{{item.fields.publisher}} </td>
+                                                    <!-- <td>{{item.fields.theme_owner}} </td> -->
+
+
+                                                </tr>
+
+                                                <tr ng-repeat="item in discontinueditems"  ng-if="!hideDiscontinued" class="gray">
+
+                                                    <td>
+                                                        <span style="font-size: 20px;">{{item.fields.dataset_title}}</span>
+
+
+                                                        <a   href="/explore/dataset/{{item.fields.dataset_id}}/table" target="_blank">
+                                                            [open]
+                                                        </a>
+
+                                                    </td>
+                                                    <td><span class="bold">{{item.fields.currency}}</span> days</td>
+                                                    <td>{{item.fields.expected_next_release}} </td>
+                                                    <td>{{item.fields.publisher}} </td>
+
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </ods-dataset-context>
+                </ods-dataset-context>
+
+                <br />
+            </div>
+
+            <!--Time Based page -->
+            <div ng-if="subselector1 == 'sub3'">
+                <div class="tabs" ng-init="tabselector2 = 'tab1'">
+                    <a class="tab"
+                       ng-click="tabselector2 = 'tab1'"
+                       ng-class="{'activetab' : tabselector2 == 'tab1'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                        Overall</a>
+                    <a class="tab"
+                       ng-click="tabselector2 = 'tab2'"
+                       ng-class="{'activetab' : tabselector2 == 'tab2'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                        By Theme</a>
+                    <a class="tab"
+                       ng-click="tabselector2 = 'tab3'"
+                       ng-class="{'activetab' : tabselector2 == 'tab3'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                        tab3</a>
+
+                </div>
+
+                <div class="ods-box" ng-if="tabselector2 == 'tab1'">  
+
+
+                    <h2>Soon...</h2>
+
+                    <br />
+                </div>
+                <div class="ods-box" ng-if="tabselector2 == 'tab2'"> 
+
+                    <h2>Soon...</h2>
+                    <br/>
+
+
+                    <br />
+
+                </div>
+
+                <div class="ods-box" ng-if="tabselector2 == 'tab3'"> 
+                    <h1>
+                        Soon...
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- activity page here -->
+        <div  ng-show="activity">
+            <div ng-if="subselector2 == 'sub1'">
+                <div class="tabs" ng-init="tabselector2 = 'tab1'">
+                    <a class="tab"
+                       ng-click="tabselector2 = 'tab1'"
+                       ng-class="{'activetab' : tabselector2 == 'tab1'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                        Overall Metrics</a>
+                    <a class="tab"
+                       ng-click="tabselector2 = 'tab2'"
+                       ng-class="{'activetab' : tabselector2 == 'tab2'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                        By Theme2</a>
+                    <a class="tab"
+                       ng-click="tabselector2 = 'tab3'"
+                       ng-class="{'activetab' : tabselector2 == 'tab3'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                        x2</a>
+
+                </div>
+                <div class="ods-box" ng-if="tabselector2 == 'tab1'">  
+
+
+                    <h2>Soon...</h2>
+
+                    <br />
+                </div>
+                <div class="ods-box" ng-if="tabselector2 == 'tab2'"> 
+
+                    <h2>Soon...</h2>
+                    <br/>
+
+
+                    <br />
+
+                </div>
+
+                <div class="ods-box" ng-if="tabselector2 == 'tab3'"> 
+                    <h1>
+                        China's Stock Markets
+                    </h1>
+                    <ods-dataset-context context="ctx" ctx-dataset="daily-stock-markets"ctx-parameters="{'disjunctive.country':true,'disjunctive.market':true,'disjunctive.indicator':true,'refine.indicator':'Close','refine.country':'China'}">
+                        <div ng-init="ctx.dataset.metas['visibility']!='domain' ? is_private= true : is_private=flase">
+
+                            <div class=row>
+                                <span class="meta-label">Source: </span>
+                                <span class="dataset-meta">
+                                    <a href="/explore/dataset/daily-stock-markets/information/?disjunctive.country&disjunctive.market&disjunctive.indicator&refine.indicator=Close&refine.country=China" target="_blank">Investing.com</a>
+                                </span>
+                                <span class="meta-label">Periodicity:</span>
+                                <span class="dataset-meta">Daily</span>
+                                <span class="meta-label">Last Data Update:</span>
+                                <span class="dataset-meta">{{ctx.dataset.metas["modified"] | date:'MMMM d y' }}</span>
+                                <span class="meta-label">Expected Next Release:</span>
+                                <span class="dataset-meta">{{ctx.dataset.metas["expected-next-release"] | date:'MMMM d y' }}</span>
+                                <span class="meta-label">Data Classification:</span>
+                                <span class="dataset-meta">
+                                    <i class="fa fa-circle circle" ng-class="{'red':ctx.dataset.metas['visibility']!='domain','green':ctx.dataset.metas['visibility']=='domain'}"></i> 
+                                    {{ctx.dataset.metas['visibility']=='domain'? 'Public' : 'Private'}}</span>
+                            </div>
+                            <div ng-if="!user.is_authenticated && ctx.dataset.metas['visibility']!='domain'" class="ods-message-box ods-message-box--info ods-back-section__option--fixed-width ng-scope">
+                                <i class="fa fa-info-circle"></i>
+                                KAPSARC users please login <a href="/saml2/login/" target="_blank"><b>HERE</b></a>, then refresh this page.
+                            </div>
+                            <div ng-if="user.is_authenticated || ctx.dataset.metas['visibility']=='domain'">
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <ods-date-range-slider class="date-slider" context="ctx"
+                                                               date-format="MMM-DD-YYYY"
+                                                               precision="day"
+                                                               initial-from="09/30/2019"
+                                                               initial-to="now"
+                                                               start-bound="'09/30/2019'"
+                                                               end-bound="'now'"
+                                                               from="obj.from"
+                                                               to="obj.to">
+                                        </ods-date-range-slider>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <ods-facets context="ctx">
+                                            <h3>Market</h3>
+                                            <ods-facet name="market"></ods-facet>
+                                        </ods-facets>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <ods-chart single-y-axis="true" single-y-axis-label="Market closing value" label-x="" align-month="true">
+                                            <ods-chart-query context="ctx" field-x="date" maxpoints="0" timescale="day" series-breakdown="market">
+                                                <ods-chart-serie expression-y="value" chart-type="line" function-y="AVG" color="range-Dark2" scientific-display="true">
+                                                </ods-chart-serie>
+                                            </ods-chart-query>
+                                        </ods-chart>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ods-dataset-context>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Models page HERE -->
+        <div  ng-show="models"> 
+
+            <!--General-->
+            <div ng-if="subselectorModelInv == 'sub1'"> 
+                <div class="tabs" ng-init="tabselector2 = 'tab1'">
+                    <a class="tab"
+                       ng-click="tabselector2 = 'tab1'"
+                       ng-class="{'activetab' : tabselector2 == 'tab1'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                       Overall Metrics</a>
+                </div>
+
+                <!--General tab here -->
+                <div class="ods-box" ng-if="tabselector2 == 'tab1'">  
+
+
+                    <ods-dataset-context
+                                         context="ctx, ctxongoing, ctxended, ctxsunset, ctxruncountenabled, ctxruncountnotenabled, 
+                                                  ctxmodelsongithub, ctxmodelsnotongithub, ctxsppsongithub, ctxappsnotongithub, ctxdataongithub, ctxdatanotongithub,
+                                                  ctxmodels, ctxapps, ctxvis, ctxdatasets"
+
+                                        
+                                         ctx-dataset="kapsarc-model-inventory"
+                                         ctxongoing-dataset="kapsarc-model-inventory" ctxongoing-parameters="{'refine.project_status':'Ongoing'}"
+                                         ctxended-dataset="kapsarc-model-inventory" ctxended-parameters="{'refine.project_status':'Ended'}"
+                                         ctxsunset-dataset="kapsarc-model-inventory" ctxsunset-parameters="{'refine.project_status':'Sunset'}"
+                                         
+                                         ctxmodels-dataset="kapsarc-model-inventory" ctxmodels-parameters="{'refine.is_model': 'True'}"
+                                         ctxapps-dataset="kapsarc-model-inventory" ctxapps-parameters="{'refine.is_app': 'True'}"
+                                         ctxvis-dataset="kapsarc-model-inventory" ctxvis-parameters="{'refine.is_vis': 'True'}"
+                                         ctxdatasets-dataset="kapsarc-model-inventory" ctxdatasets-parameters="{'refine.is_dataset': 'True'}"
+                                         
+                                         
+                                         
+                                         ctxmodelsongithub-dataset="kapsarc-model-inventory" ctxmodelsongithub-parameters="{'refine.is_model': 'True','refine.model_on_github':'Yes'}"
+                                         ctxmodelsnotongithub-dataset="kapsarc-model-inventory" ctxmodelsnotongithub-parameters="{'refine.is_model': 'True','refine.model_on_github':'No'}"
+                                 
+                                         ctxsppsongithub-dataset="kapsarc-model-inventory" ctxsppsongithub-parameters="{'refine.project_type': ['App','Vis'], 'disjunctive.project_type':true, 'refine.appvis_on_github':'Yes'}"
+                                         ctxappsnotongithub-dataset="kapsarc-model-inventory" ctxappsnotongithub-parameters="{'refine.project_type': ['App','Vis'], 'disjunctive.project_type':true, 'refine.appvis_on_github':'No'}"
+                                         
+                                         ctxdataongithub-dataset="kapsarc-model-inventory" ctxdataongithub-parameters="{'refine.project_type': 'Model', 'refine.data_on_github':'Yes'}"
+                                         ctxdatanotongithub-dataset="kapsarc-model-inventory" ctxdatanotongithub-parameters="{'refine.project_type': 'Model', 'refine.data_on_github':'No'}"
+                                         
+                                         ctxruncountenabled-dataset="kapsarc-model-inventory" ctxruncountenabled-parameters="{'refine.run_count_script_enabled':'Yes'}" 
+                                         ctxruncountnotenabled-dataset="kapsarc-model-inventory" ctxruncountnotenabled-parameters="{'refine.run_count_script_enabled':'No'}"> 
+
+                        <h2>Models KPI Measures</h2>
+
+                        <div class=row> <!-- row under title -->
+                            <span class="meta-label">Source: </span>
+                            <span class="dataset-meta">
+                                <a href="/explore/dataset/kapsarc-model-inventory/" target="_blank"> KAPSARC Model Inventory</a>
+                            </span>
+                            <span class="meta-label">Last Update:  </span> <!--dataset-meta-->
+                            <span class="dataset-meta"> {{ctx.dataset.metas["modified"] | date:'MMMM d y' }}</span>
+                            <br/>
+                            <br /><br /><br /><br />
+                        </div>
+
+
+                        <!-- 8 boxes here-->
+
+                        <div class="row"> <!-- ROW 1-->
+                            
+                            
+                            <div class="col-md-3 col-sm-3 col-xs-4"> <!-- Row 1 Box 1-->
+
+                                <div ods-aggregation="totalProjects"
+                                     ods-aggregation-context="ctx"
+                                     ods-aggregation-function="COUNT"
+                                     >
+                                    
+                                    <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/" target="_blank">
+                                        <div class="kpi" >
+                                            <div class="kpi-title">
+                                                No. of Projects
+                                            </div>
+                                            <div class="kpi-value">
+                                                {{ totalProjects }} 
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-4"> <!-- Row 1 Box 2-->
+
+
+                                <div ods-aggregation="ongoing"
+                                     ods-aggregation-context="ctxongoing"
+                                     ods-aggregation-function="COUNT"
+                                     >
+                                    <div class="kpi">
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?refine.project_status=Ongoing" target="_blank">
+
+                                            <div class="kpi-title">
+                                                No. of Ongoing Projects
+                                            </div>
+                                            <div class="kpi-value">
+                                                {{ ongoing }}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xs-4"> <!-- Row 1 Box 3-->
+                                <div ods-aggregation="ended"
+                                     ods-aggregation-context="ctxended"
+                                     ods-aggregation-function="COUNT"
+                                     >
+
+                                    <div class="kpi">
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?refine.project_status=Ended" target="_blank">
+
+                                            <div class="kpi-title">
+                                                No. of Ended Projects
+                                            </div>
+                                            <div class="kpi-value">
+                                                {{ ended }}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3 col-sm-3 col-xs-4"> <!-- Row 1 Box 4-->
+
+
+                                <div ods-aggregation="sunset"
+                                     ods-aggregation-context="ctxsunset"
+                                     ods-aggregation-function="COUNT"
+                                     >
+                                    <div class="kpi">
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?refine.project_status=Sunset" target="_blank">
+
+                                            <div class="kpi-title">
+                                                No. of Sunset Projects
+                                            </div>
+                                            <div class="kpi-value">
+                                                {{ sunset }}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- ROW 1 End-->
+
+                        <br /><br />
+                        <div class="row"> <!-- ROW extra Model/App/Vis/Datasets? -->
+                            
+                            
+                            
+                            <div class="col-md-3 col-sm-3 col-xs-4"> <!-- Row 1 Box 2-->
+
+
+                                <div ods-aggregation="models"
+                                     ods-aggregation-context="ctxmodels"
+                                     ods-aggregation-function="COUNT"
+                                     >
+                                    <div class="kpi">
+                                        <a class="kpi-link" href="explore/dataset/kapsarc-model-inventory/table/?disjunctive.project_type&disjunctive.is_model&disjunctive.is_app&disjunctive.is_vis&disjunctive.is_dataset&refine.project_type=Model" target="_blank">
+
+                                            <div class="kpi-title">
+                                                No. of Models
+                                            </div>
+                                            <div class="kpi-value">
+                                                {{ models }}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xs-4"> <!-- Row 1 Box 3-->
+                                <div ods-aggregation="apps"
+                                     ods-aggregation-context="ctxapps"
+                                     ods-aggregation-function="COUNT"
+                                     >
+
+                                    <div class="kpi">
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?disjunctive.project_type&disjunctive.is_model&disjunctive.is_app&disjunctive.is_vis&disjunctive.is_dataset&refine.project_type=App" target="_blank">
+
+                                            <div class="kpi-title">
+                                                No. of Applications
+                                            </div>
+                                            <div class="kpi-value">
+                                                {{ apps }}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3 col-sm-3 col-xs-4"> <!-- Row 1 Box 4-->
+
+
+                                <div ods-aggregation="vis"
+                                     ods-aggregation-context="ctxvis"
+                                     ods-aggregation-function="COUNT"
+                                     >
+                                    <div class="kpi">
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?disjunctive.project_type&disjunctive.is_model&disjunctive.is_app&disjunctive.is_vis&disjunctive.is_dataset&refine.project_type=Vis" target="_blank">
+
+                                            <div class="kpi-title">
+                                                No. of Visulizations 
+                                            </div>
+                                            <div class="kpi-value">
+                                                {{ vis }}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-3 col-sm-3 col-xs-4"> <!-- Row 1 Box 1-->
+
+                                <div ods-aggregation="datasets"
+                                     ods-aggregation-context="ctxdatasets"
+                                     ods-aggregation-function="COUNT"
+                                     >
+                                    
+                                    <a class="kpi-link" href="explore/dataset/kapsarc-model-inventory/table/?disjunctive.project_type&disjunctive.is_model&disjunctive.is_app&disjunctive.is_vis&disjunctive.is_dataset&refine.project_type=Dataset" target="_blank">
+                                        <div class="kpi" >
+                                            <div class="kpi-title">
+                                                No. of Datasets
+                                            </div>
+                                            <div class="kpi-value">
+                                                {{ datasets }} 
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div> <!-- ROW 1 End-->
+                        
+                        <br /><br />
+                        
+                        <div class="row"> <!-- ROW 2 -->
+                            <div class="col-md-3 col-sm-3 col-xs-4"> 
+
+                                <!-- Row 2 Box 1-->
+                                <div ods-aggregation="modelsongithub, modelnotongit"
+                                     ods-aggregation-modelsongithub-context="ctxmodelsongithub"
+                                     ods-aggregation-modelsongithub-function="COUNT"
+                                     ods-aggregation-modelnotongit-context="ctxmodelsnotongithub"
+                                     ods-aggregation-modelnotongit-function="COUNT"> 
+
+                                    <div class="kpi">
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?refine.is_model=True&refine.model_on_github=Yes" target="_blank">
+                                            <div class="kpi-title">Models on GitHub</div>
+                                            <div class="kpi-value">
+                                                {{ modelsongithub }}
+                                            </div>
+                                        </a>
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?refine.is_model=True&refine.model_on_github=No" target="_blank">
+                                            <div class="kpi-value-reference">
+                                                Not on GitHub: <span class="bold">{{ modelnotongit }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div><!-- Row 2 Box 1 End-->
+
+                            <!-- Row 2 Box 2-->
+                            <div class="col-md-3 col-sm-3 col-xs-4">
+                            <div ods-aggregation="appsongithub, appsnotongithub"
+                                 ods-aggregation-appsongithub-context="ctxsppsongithub"
+                                 ods-aggregation-appsongithub-function="COUNT"
+                                 ods-aggregation-appsnotongithub-context="ctxappsnotongithub"
+                                 ods-aggregation-appsnotongithub-function="COUNT"
+                                 >
+                                 
+                                    <div class="kpi">
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?refine.appvis_on_github=Yes" target="_blank">
+                                            <div class="kpi-title"> Apps/Vis on GitHub</div>
+                                            <div class="kpi-value">
+                                                {{ appsongithub }}
+                                            </div>
+                                        </a>
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?refine.appvis_on_github=No" target="_blank">
+                                            <div class="kpi-value-reference">
+                                                Not on GitHub: <span class="bold">{{ appsnotongithub }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div> <!-- Row 2 Box 2 End-->
+
+
+                            <!-- Row 2 Box 3 -->
+                            <div class="col-md-3 col-sm-3 col-xs-4"> 
+                            <div ods-aggregation="dataongithub, datanotongithub"
+                                 ods-aggregation-dataongithub-context="ctxdataongithub"
+                                 ods-aggregation-dataongithub-function="COUNT"
+                                 ods-aggregation-datanotongithub-context="ctxdatanotongithub"
+                                 ods-aggregation-datanotongithub-function="COUNT"
+                                 >
+                                
+                                    <div class="kpi">
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?refine.data_on_github=Yes" target="_blank">
+                                            <div class="kpi-title">
+                                                Data on GitHub
+                                            </div>
+                                            <div class="kpi-value">
+                                                {{ dataongithub  }}
+                                            </div>
+                                        </a>
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?refine.data_on_github=No" target="_blank">
+                                            <div class="kpi-value-reference">
+                                                Not on GitHub: <span class="bold">{{ datanotongithub  }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div><!-- Row 2 Box 3 End-->
+
+                                <div class="col-md-3 col-sm-3 col-xs-4"> 
+
+                            <!-- Row 2 Box 4 -->
+                            <div ods-aggregation="runcountenabled, runcountnotenabled"
+                                 ods-aggregation-runcountenabled-context="ctxruncountenabled"
+                                 ods-aggregation-runcountenabled-function="COUNT"
+                                 ods-aggregation-runcountnotenabled-context="ctxruncountnotenabled"
+                                 ods-aggregation-runcountnotenabled-function="COUNT"
+                                 >
+                                    <div class="kpi">
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?refine.run_count_script_enabled=Yes" target="_blank">
+                                            <div class="kpi-title">
+                                                Model Runs Count Enabled
+                                            </div>
+                                            <div class="kpi-value">
+                                                {{ runcountenabled  }}
+                                            </div>
+                                        </a>
+                                        <a class="kpi-link" href="/explore/dataset/kapsarc-model-inventory/table/?refine.run_count_script_enabled=No" target="_blank">
+                                            <div class="kpi-value-reference">
+                                                Not Enabled: <span class="bold">{{ runcountnotenabled }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div> 
+                            </div><!-- Row 2 Box 4 End-->
+
+                        </div> <!-- ROW 2 End-->
+
+
+                        <!-- Heap Visuals Here -->
+                        
+                        
+                        
+                        
+
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- Heap Visuals Ends Here -->
+                    </ods-dataset-context>
+
+                    <!-- End tab overall metrics -->
+
+                </div>
+
+
+            </div>
+
+            <!--models page -->
+
+            <!-- ###################################-->
+
+            <div ng-if="subselectorModelInv == 'sub2'"> 
+                <div class="tabs" ng-init="tabselector2 = 'tab1'">
+                    <a class="tab"
+                       ng-click="tabselector2 = 'tab1'"
+                       ng-class="{'activetab' : tabselector2 == 'tab1'}"><i class="fa fa-area-chart" aria-hidden="true"></i>
+                       Overall Metrics</a>
+                </div>
+
+                <div class="ods-box" ng-if="tabselector2 == 'tab1'">  
+
+                    <div> 
+                        <!--create visulization here progress bar -->
+                    </div>
+
+                    <!--create dropdown menu to select a project with sorting by year or status-->
+                    <div ng-app="ods-widgets">
+                        <div class="container"
+
+                             ng-init="domain ='datasource.kapsarc.org'; 
+                                      datasetid='kapsarc-model-inventory';
+
+                                      sort = 'project_name';
+
+                                      filters = [
+                                      {'id':'project_type','multiple':true,'label':'Project Type' },
+                                      {'id':'project_status','multiple':true,'label':'Project Status' },
+                                  
+                                      ];
+                                      fieldDate = 'model_date';
+                                      resetFiltersButton = true;
+                                      resetFiltersButtonLabel = 'Clear filters';
+                                      fieldDefaultRangeStartsNow = false;
+
+                                      view = 'cards';
+                                      fieldsList = [
+                                      {'field':'project_status', 'label': 'Project Status'},
+                                      {'field':'project_type', 'label': 'Project Type'},
+                                      {'field':'sme', 'label': 'Subject Matter Expert'},
+                                      {'field':'version', 'label': 'Project Last Version'}
+                                      ];
+                                      kwebsite_url = 'models_on_kwebsite_url';
+                                      kwebsite_urlLabel = 'Model on KAPSARC Website';
+                                      
+                                  
+
+                                      cardTitle = 'project_name';
+                                      itemsPerRow = '3';
+
+                                      mapView = false;
+                                      mapPicto = '';
+                                      mapPictoColor = '';
+
+                                      sourceLinkLabel = 'Link to Dataset';
+                                      noResultMsg = 'No Result.';
+
+
+                                      DO_NOT_MODIFY_BELOW;
+
+                                      localctxfields = {};
+                                      values = {};
+                                      activeFilters = {};
+                                      localctx = undefined;
+                                      ">
+
+                            <ods-dataset-context context="localctx"
+                                                 localctx-domain="{{ domain }}"
+                                                 localctx-dataset="{{ datasetid}}">
+                                {{ localctx = ctx || localctx ; '' }}
+                                <!-- calling domain and dataset -->
+                                <ods-dataset-context ng-if="localctx.dataset.datasetid"
+                                                     context="localctxdate"
+                                                     localctxdate-domain="{{ localctx.domain }}"
+                                                     localctxdate-dataset="{{ localctx.dataset.datasetid }}">
+
+
+
+                                    <div>
+                                        <h1 class="page-title">
+                                            {{ localctx.dataset.metas.title }}
+                                        </h1>
+                                    </div>
+                                    
+                                    <!-- Dataset Source Link [KAPSARC Model Inventory] -->
+                                    <div>
+                                        <div class="margin-bottom-20" style="text-align: left; width: 100%">
+                                            <a href="https://{{ domain }}/explore/dataset/{{ datasetid }}/"
+                                               target="_blank">{{ sourceLinkLabel }}</a>
+                                        </div>
+                                    </div>
+
+                                    <span ng-repeat="field in localctx.dataset.fields">
+                                        {{ localctxfields[field.name] = field.label; '' }}
+                                    </span>
+
+                                    <div>
+                                        <span ng-repeat="filter in filters">
+                                            {{ localctx.parameters['refine.' + filter.id] = activeFilters[filter.id] ; '' }}
+                                        </span>
+                                    </div>
+
+                                    
+                                    <div class="content-card search-module-container">
+                                        <!-- SEARCH -->
+                                        <div class="search-module">
+                                            <i class="fa fa-search search-module-icon" aria-hidden="true"></i>
+                                            <input placeholder="Search.."
+                                                   ng-model="localctx.parameters['q']"
+                                                   ng-model-options="{ updateOn: 'keyup', debounce: { 'default': 300, 'blur': 0 }}"
+                                                   ng-change="localctx.parameters['start'] = undefined"
+                                                   class="search-module-input"
+                                                   type="text"/>
+                                            <button class="search-module-clear"
+                                                    ng-if="localctx.parameters['q']"
+                                                    ng-click="localctx.parameters['q'] = undefined;
+                                                              localctx.parameters['start'] = undefined">
+                                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+
+                                        <!-- FILTERS Search & Select -->
+                                        <div class="filter-list"
+                                             ng-init="dropdown.open = '';
+                                                      select = {}">
+                                            <div ng-repeat="filter in filters">
+                                                {{ localctx.parameters['disjunctive.' + filter.id] = true; '' }}
+                                                <div ods-facet-results="categories"
+                                                     ods-facet-results-facet-name="{{ filter.id }}"
+                                                     ods-facet-results-context="localctx"
+                                                     ods-facet-results-sort="alphanum">
+                                                    <ods-select ng-if="categories"
+                                                                selected-values="activeFilters[filter.id]"
+                                                                multiple="filter.multiple"
+                                                                options="categories"
+                                                                label-modifier="name"
+                                                                value-modifier="name"
+                                                                on-change="localctx.parameters['start'] = undefined"
+                                                                placeholder="{{ filter.label || localctxfields[filter.id] }}"></ods-select>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <!-- FILTERS date (if any) -->
+                                        <div class="filter-date"
+                                             ng-if="fieldDate">
+
+                                            <span ods-analysis="dateminmax"
+                                                  ods-analysis-context="localctxdate"
+                                                  ods-analysis-x-year="{{ fieldDate }}.year"
+                                                  ods-analysis-x-month="{{ fieldDate }}.month"
+                                                  ods-analysis-x-day="{{ fieldDate }}.day"
+                                                  ods-analysis-serie-c="COUNT()"
+                                                  ods-analysis-sort="x.{{ fieldDate }}.year,x.{{ fieldDate }}.month,x.{{ fieldDate }}.day">
+                                                <span ng-if="dateminmax.results && dateminmax.results.length > 0">
+                                                    {{ values['periode']['min'] = dateminmax.results[0].x.year + '-' + (10 > dateminmax.results[0].x.month?'0':'') + dateminmax.results[0].x.month + '-' + (10 > dateminmax.results[0].x.day?'0':'') + dateminmax.results[0].x.day;
+                                                    values['periode']['max'] = dateminmax.results[dateminmax.results.length-1].x.year + '-' + (10 > dateminmax.results[dateminmax.results.length-1].x.month?'0':'') + dateminmax.results[dateminmax.results.length-1].x.month + '-' + (10 > dateminmax.results[dateminmax.results.length-1].x.day?'0':'') + dateminmax.results[dateminmax.results.length-1].x.day;
+                                                    ''}}
+                                                </span>
+                                            </span>
+
+                                            
+
+                                            <ods-date-range-slider ng-if="values.periode.min && values.periode.max"
+                                                                   context="localctx"
+                                                                   initial-from="{{ values.periode.min }}"
+                                                                   initial-to="{{ values.periode.max }}"
+                                                                   start-bound="values.periode.min"
+                                                                   end-bound="values.periode.max"
+                                                                   date-field="{{ fieldDate }}"
+                                                                   precision="day"
+                                                                   from="values.periode.minselection"
+                                                                   to="values.periode.maxselection">
+                                            </ods-date-range-slider>
+
+                                            
+                                            <button ng-if="resetFiltersButton && values.periode.min && values.periode.max"
+                                                    ng-disabled="values.periode.minselection == values.periode.min &&
+                                                                 values.periode.maxselection == values.periode.max"
+                                                    class="filter-date-button"
+                                                    ng-class="{'filter-date-button-disabled':
+                                                              values.periode.minselection == values.periode.min &&
+                                                              values.periode.maxselection == values.periode.max}"
+                                                    ng-click="values.periode.minselection = values.periode.min;
+                                                              values.periode.maxselection = values.periode.max;
+                                                              localctx.parameters['start'] = undefined">
+                                                Reset Dates <i class="fa fa-arrows-h" aria-hidden="true"></i>
+                                            </button>
+
+                                        </div>
+
+
+                                        <div ods-aggregation="records"
+                                             ods-aggregation-context="localctx"
+                                             ods-aggregation-function="COUNT"
+                                             >
+                                            {{ records }} records
+                                        </div>
+                                    </div>
+
+                                                                                   <!-- Chart 
+                                                                                   <div ng-app="ods-widgets">
+                                                                                      <ods-dataset-context context="xxxcx"
+                                                                                                         xxxcx-domain="datasource.kapsarc.org"
+                                                                                                         xxxcx-dataset="kem_users">
+
+                                                                                        <div class="row" >
+                                                                                            <div class="col-sm-12">
+                                                                                                <div class="ods-box" >
+                                                                                                    <h2>
+                                                                                                        New Users Vs Returing
+                                                                                                    </h2>
+                                                                                                    
+                                                                                                    <ods-chart>
+                                                                                                        <ods-chart-query context="xxxcx"
+                                                                                                                         field-x="date"
+                                                                                                                         maxpoints="0"
+                                                                                                                         timescale="year"
+                                                                                                                         series-breakdown="Users"
+                                                                                                                         >
+                                                                                                            <ods-chart-serie expression-y="Value"
+                                                                                                                             chart-type="spline"
+                                                                                                                             function-y="COUNT"
+                                                                                                                             scientific-display="true"
+                                                                                                                             >
+                                                                                                            </ods-chart-serie>
+                                                                                                        </ods-chart-query>
+                                                                                                    </ods-chart>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </ods-dataset-context>
+                                                                                       
+                                                                                       
+                                                                                       
+                                                                                       
+                                                                                </div>  End of chart  -->
+
+
+                                    
+                                    <!-- Try to call this from dataset!! -->
+                                  <!-- <ods-dataset-context context="kemusers" kemusers-dataset="kem_users" kemusers-parameters="{'disjunctive.comparing_users':true,'sort':'-date'}">
+                                        <ods-chart align-month="true">
+                                            <ods-chart-query context="kemusers" field-x="date" maxpoints="0" timescale="month" series-breakdown="comparing_users">
+                                                <ods-chart-serie expression-y="value" chart-type="line" function-y="AVG" color="range-Accent" scientific-display="true">
+                                                </ods-chart-serie>
+                                            </ods-chart-query>
+                                        </ods-chart>
+
+                                    </ods-dataset-context> -->
+                                        
+                                    
+                                    
+                                    <!-- CARDS -->
+                                    <section ng-if="view == 'cards'"
+                                             class="row">
+                                        <div class="{{ 'col-md-' + (mapView?5:12) }} {{ mapView ? 'map-active':''}}">
+                                            <ods-infinite-scroll-results context="localctx"
+                                                                         list-class="row row-equal-height listing"
+                                                                         result-class="{{ 'col-md-' + (12/(mapView?1:itemsPerRow)) }} margin-bottom-20"
+                                                                         no-results-message="{{ noResultMsg }}">
+                                                <div class="content-card"
+                                                     tabindex="0">
+                                                    
+                                                    <div class="content-card-body" > 
+                                                        <h2 class="content-card-title text-center">
+                                                            {{ item.fields[$parent.$parent.$parent.$parent.$parent.cardTitle] }}
+                                                        </h2>
+                                                        <div class="content-card-fields">
+                                                            <!-- If fieldsList is an array of fields ID -->
+                                                            <dl ng-if="!$parent.$parent.$parent.$parent.$parent.fieldsList[0].field">
+                                                                <dt ng-repeat-start="field in $parent.$parent.$parent.$parent.$parent.fieldsList">
+                                                                    {{ $parent.$parent.$parent.$parent.$parent.localctxfields[field] }}
+                                                                </dt>
+                                                                <dd ng-repeat-end>
+                                                                    {{ item.fields[field] }}
+                                                                </dd>
+                                                            </dl>
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+               <!--## Card info Content ##-->
+                                                            
+                                                            <!-- If fieldsList is an object (advanced settings of fields) -->
+                                                            <dl ng-if="$parent.$parent.$parent.$parent.$parent.fieldsList[0].field">
+                                                                <dt ng-repeat-start="fieldconfig in $parent.$parent.$parent.$parent.$parent.fieldsList"
+                                                                    ng-show="item.fields[fieldconfig.field]">
+                                                                    {{ (fieldconfig|keys).indexOf('label')>=0?fieldconfig.label : $parent.$parent.$parent.$parent.$parent.localctxfields[fieldconfig.field] }}
+                                                                </dt>
+                                                                <dd ng-show="item.fields[fieldconfig.field]"
+                                                                    ng-switch="fieldconfig.format"
+                                                                    ng-repeat-end>
+                                                                    <span ng-switch-when="number">
+                                                                        {{ item.fields[fieldconfig.field] | number : (fieldconfig.options.precision || 0) }} {{ fieldconfig.options.unit }}
+                                                                    </span>
+                                                                    <span ng-switch-when="date">
+                                                                        {{ item.fields[fieldconfig.field] | date : (fieldconfig.options.dateFormat || 'mediumDate') }}
+                                                                    </span>
+                                                                    <span ng-switch-default>
+                                                                        {{ item.fields[fieldconfig.field] }}
+                                                                    </span>
+                                                                </dd>
+                                                            </dl>
+                                                        </div>
+                                                        
+              <!--## End Card info Content ##-->  
+              
+              <!--## button link to more info ##-->                                          
+                                                        
+                                                        <div ng-if="$parent.$parent.$parent.$parent.$parent.kwebsite_url" class="text-center">
+                                                            <!-- if fieldLink is a json and contains the 'id' key, it means that the link points to a file hosted on ODS platform and can be downloaded. If it's an external link, the other link tag is used -->
+                                                            <a ng-if="item.fields[$parent.$parent.$parent.$parent.$parent.kwebsite_url].id"
+                                                               href="https://{{ $parent.$parent.$parent.$parent.$parent.domain }}/explore/dataset/{{ $parent.$parent.$parent.$parent.$parent.datasetid }}/files/{{ item.fields[$parent.$parent.$parent.$parent.$parent.kwebsite_url].id }}/download/"
+                                                               target="_blank"
+                                                               class="content-card-button">
+                                                                {{ $parent.$parent.$parent.$parent.$parent.kwebsite_urlLabel }}
+                                                                
+                                                            </a>
+
+                                                            <!-- fieldLink is used here
+                                          For more advanced scenario, you can send the user to :
+
+                                          - the dataset table filtered with the fieldLink value, through a text query
+                                          href="/explore/dataset/{{ $parent.$parent.$parent.$parent.$parent.datasetid }}/table?q={{ item.fields[$parent.$parent.$parent.$parent.$parent.fieldLink] }}"
+
+                                          - the dataset table filtered with the fieldLink value, through a refine on the field
+                                          href="/explore/dataset/{{ $parent.$parent.$parent.$parent.$parent.datasetid }}/table?refine.{{ $parent.$parent.$parent.$parent.$parent.fieldLink }}={{ item.fields[$root.fieldLink] }}"
+
+                                          - a page using url-sync=true setting :
+                                          href="/pages/yourpage/?refine.{{ $parent.$parent.$parent.$parent.$parent.fieldLink }}={{ item.fields[$parent.$parent.$parent.$parent.$parent.fieldLink] }}"
+                                          
+
+href="{{ item.fields[$parent.$parent.$parent.$parent.$parent.fieldLink] }}"
+
+-->
+                                                  
+                                                            
+                                                              
+                                                                <div ng-init="pop = {'state':false}" class="content-card-button">
+                                                                         
+                                                                        
+                                                                            <button class="content-card-button" 
+                                                                                    ng-click="pop.state = true" id="xx1">
+                                                                                More Infromation
+                                                                            </button> 
+                                                                    
+                                                                        
+<!-- ################################################## working here ################################################## -->
+                                                                    
+                                                                        <div class="ods-pop-in"
+                                                                             ng-if="pop.state">
+                                                                            
+                                                                            <div class="ods-pop-in__container">
+                                                                                <!-- Model popup page info [[ needs reorginizing ]] -->
+                                                                                <h2 class="title">{{item.fields.project_name}} {{item.fields.version}}</h2>
+                                                                                <p>Project Status: {{item.fields.project_status}}</p>
+                                                                                <p>Project Lead: {{item.fields.sme}}</p>
+                                                                                <p>Project Lead Email: {{}}</p>
+                                                                                <p>program Director: {{item.fields.program_director}}</p>
+                                                                                <p>Project Type: {{item.fields.project_type}}</p>
+                                                                                <p>Project ID: {{item.fields.model_id}}</p>
+                                                                                <p>Project Date: {{item.fields.model_date}}</p>
+                                                                                <p>Project Theme: {{}}</p>
+                                                                                <p>Data Classification used: {{item.fields.data_classification}} </p> 
+                                                                                
+                                                                                <!-- All model links -->
+                                                                                <a ng-if="!item.fields[$parent.$parent.$parent.$parent.$parent.kwebsite_url].id" href="{{ item.fields.models_on_kwebsite_url}}"
+                                                                                   target="_blank"
+                                                                                   class="content-card-button">
+                                                                                   Model on KAPSARC Website
+                                                                                </a>
+                                                                               <a ng-if="!item.fields[$parent.$parent.$parent.$parent.$parent.kwebsite_url].id" href="{{ item.fields.model_on_github_url}}"
+                                                                                   target="_blank"
+                                                                                   class="content-card-button">
+                                                                                   Model on GitHUb
+                                                                                </a>
+                                                                                <a ng-if="!item.fields[$parent.$parent.$parent.$parent.$parent.kwebsite_url].id" href="{{ item.fields.appvis_on_github_url}}"
+                                                                                   target="_blank"
+                                                                                   class="content-card-button">
+                                                                                   Application on GitHUb
+                                                                                </a>
+                                                                                
+                                                                                <!-- Add here publication Links!!!! ###### -->
+                                                                                
+                                                                                
+                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                <button class="ods-button"
+                                                                                        ng-click="pop.state = false">
+                                                                                    Close
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="ods-pop-in__backdrop" ng-click="pop.state = false"></div>
+                                                                        </div>
+                                                                              
+                                                                               
+                                                                </div>
+               <!--## Ends button link to more info ##-->                                              
+                                                            
+                                                            
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </ods-infinite-scroll-results>
+                                        </div>
+                                    </section>
+
+
+                                </ods-dataset-context>
+                            </ods-dataset-context>
+
+                        </div></div>
+
+                    <br />
+
+                </div>
+            </div>
+        </div> <!-- Models Dashboard ends HERE -->
+
+        <!-- ###################################-->
+
+
+
+
+
+
+
+    </div> <!--end main content-->
+    
+    
+    
+ 
+    
+    
+    
+    
+    
+</div>
